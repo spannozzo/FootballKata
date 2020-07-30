@@ -29,17 +29,24 @@ class Weather {
     public int tempRange() {return maxTemp - minTemp;}
 }
 
+@RequiredArgsConstructor
+class MapReduce<From, To> {
+    final Function<From, To> mapFn;
+    final BinaryOperator<To> reducer;
+
+    To mapReduce(Stream<From> stream) { return stream.map(mapFn).reduce(reducer).get(); }
+}
+
+
 public class DataKata {
     static CompositeParseData3<Integer, Integer, Integer> weatherParserBuilder = ColumnsParser.parseInt(3, 4).thenInt(7, 8).thenInt(13, 14);
-    static Function<String, Weather> weatherParser = weatherParserBuilder.parseWith((l, m, r) -> new Weather(l, m, r));
-
     static CompositeParseData3<String, Integer, Integer> footballParserBuilder = ColumnsParser.parseString(8, 22).thenInt(44, 45).thenInt(51, 52);
-    static Function<String, Football> footBallParser = footballParserBuilder.parseWith((l, m, r) -> new Football(l, m, r));
 
-    static <From, To> To mapReduce(Stream<From> stream, Function<From, To> mapFn, BinaryOperator<To> reducer) { return stream.map(mapFn).reduce(reducer).get(); }
+    static MapReduce<String, Weather> weatherMapReduce = new MapReduce<>(weatherParserBuilder.parseWith(Weather::new), smallestReducer(Weather::tempRange));
+    static MapReduce<String, Football> footballMapReduce = new MapReduce<>(footballParserBuilder.parseWith(Football::new), smallestReducer(Football::scoreDifference));
 
     public static void main(String[] args) {
-        System.out.println(mapReduce(FileLinesSource.stream("football.dat"), footBallParser, smallestReducer(Football::scoreDifference)));
-        System.out.println(mapReduce(FileLinesSource.stream("weather.dat"), weatherParser, smallestReducer(Weather::tempRange)));
+        System.out.println(weatherMapReduce.mapReduce(FileLinesSource.stream("weather.dat")));
+        System.out.println(footballMapReduce.mapReduce(FileLinesSource.stream("football.dat")));
     }
 }
