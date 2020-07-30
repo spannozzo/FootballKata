@@ -14,7 +14,8 @@ public class ColumnsParser<T> {
 
     public static <T1> ColumnsParser<T1> parse(Function<String, T1> fn, int from, int to) { return new ColumnsParser<>(fn, from, to);}
 
-    public static ColumnsParser<String> parseString(int from, int to) { return new ColumnsParser<String>(s -> s, from, to);}
+    public static ColumnsParser<String> parseString(int from, int to) { return new ColumnsParser<String>(String::trim, from, to);}
+    public static ColumnsParser<Integer> parseInt(int from, int to) { return new ColumnsParser<Integer>(s -> Integer.parseInt(s.trim()), from, to);}
 
     final Function<String, T> fn;
     final int from;
