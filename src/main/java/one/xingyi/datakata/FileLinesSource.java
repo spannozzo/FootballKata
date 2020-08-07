@@ -15,8 +15,7 @@ public class FileLinesSource {
                     skip(1).
                     filter(s -> !s.trim().startsWith("-")).
                     filter(s -> !s.isEmpty()).
-                    filter(s->!s.trim().startsWith("mo"))
-                    ;
+                    filter(s->!s.trim().startsWith("mo"));
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
