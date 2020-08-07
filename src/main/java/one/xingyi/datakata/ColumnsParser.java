@@ -5,10 +5,6 @@ import lombok.RequiredArgsConstructor;
 
 import java.util.function.Function;
 
-interface Function3<T1, T2, T3, R> {
-    R apply(T1 t1, T2 t2, T3 t3);
-}
-
 @RequiredArgsConstructor
 public class ColumnsParser<T> {
 
@@ -37,8 +33,8 @@ public class ColumnsParser<T> {
 
 @RequiredArgsConstructor
 class CompositeParseData2<T1, T2> {
-    final private ColumnsParser<T1> p1;
-    final private ColumnsParser<T2> p2;
+    final  ColumnsParser<T1> p1;
+    final  ColumnsParser<T2> p2;
 
 
     <T3> CompositeParseData3 then(Function<String, T3> fn3, int from3, int to3) {
