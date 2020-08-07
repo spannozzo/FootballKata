@@ -6,3 +6,9 @@ Write a program to print the name of the team with the smallest difference in â€
 
 
 [The powerpoint for this kata can be found here](https://docs.google.com/presentation/d/e/2PACX-1vTUiXkFtCgbnkP9HXWAVgbwDPqcoIquA33WuZvyO9_MLzyOk5rTCBtKR-1CvxHqmUpdhsb7TnSge5jU/pub?start=false&loop=false&delayms=3000)
+
+Please note that this Kata is deliberately left unfinished.
+* Look at [FileLinesSource](src\main\java\one\xingyi\datakata\FileLinesSource.java). 
+* Consider if you want to turn MapReduce into FilterMapReduce
+* Should some of the classes be moved? 
+    * They are in the current locations to make it easier to present on the screen
