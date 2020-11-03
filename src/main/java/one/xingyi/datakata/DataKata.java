@@ -26,6 +26,6 @@ public class DataKata {
     static <From, To> To mapReduce(Stream<From> stream, Function<From, To> mapFn, BinaryOperator<To> reducer) { return stream.map(mapFn).reduce(reducer).get(); }
 
     public static void main(String[] args) {
-        System.out.println(mapReduce(WeatherSource.stream("football.dat"), parser, smallestReducer(Football::scoreDifference)));
+        System.out.println(mapReduce(FootballSource.stream("football.dat"), parser, smallestReducer(Football::scoreDifference)));
     }
 }
